@@ -19,4 +19,30 @@ const postPharmacy = async (req, res) => {
     })
 }
 
-module.exports = {getPharmacy, postPharmacy};
+const putPharmacy = async (req, res) => {
+    
+    try {
+        await Pharmacy.findByIdAndUpdate(req.params.id, req.body);
+
+        res.status(200).json({
+            productName: req.body.productName,
+            price: req.body.price,
+            discount: req.body.discount,
+            stock: req.body.stock,
+            statusCode: 200,
+            msg: "resource updated correctly"
+        });
+    } catch (error) {
+        res.status(500).json({
+            productName: req.body.productName,
+            price: req.body.price,
+            discount: req.body.discount,
+            stock: req.body.stock,
+            msg: "Error - " + error.message,
+            statusCode: 500
+        })
+    }
+
+}
+
+module.exports = {getPharmacy, postPharmacy, putPharmacy};
