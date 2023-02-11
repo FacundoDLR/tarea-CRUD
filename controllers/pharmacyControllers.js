@@ -1,9 +1,22 @@
 
 const Pharmacy = require('../models/Pharmacy');
 
-const getPharmacy = (req, res) => {
-    const pharmacy = Pharmacy.find();
+const getPharmacy = async (req, res) => {
+    const pharmacy = await Pharmacy.find();
     res.status(200).json(pharmacy);
 }
 
-module.exports = {getPharmacy};
+const postPharmacy = async (req, res) => {
+    const product = new Pharmacy(req.body);
+    await product.save();
+
+    res.status(201).json({
+        productName: product.productName,
+        price: product.price,
+        discount: product.discount,
+        stock: product.stock,
+        msg: "resource created"
+    })
+}
+
+module.exports = {getPharmacy, postPharmacy};

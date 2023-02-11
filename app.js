@@ -23,6 +23,7 @@ app.use('/', indexRouter); //Ruta principal
 app.use('/users', usersRouter);
 app.use('/pharmacy', pharmacyRouter);
 
+//CONEXION A DB
 conection();
 
 module.exports = app;
