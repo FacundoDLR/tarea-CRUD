@@ -9,4 +9,6 @@ router.post('/registro', pharmacyController.postPharmacy);
 
 router.put('/actualizar/:id', pharmacyController.putPharmacy);
 
+router.put('/eliminar/:id', pharmacyController.deletePharmacy);
+
 module.exports = router;

@@ -45,4 +45,38 @@ const putPharmacy = async (req, res) => {
 
 }
 
-module.exports = {getPharmacy, postPharmacy, putPharmacy};
+const deletePharmacy = async (req, res) => {
+
+    try {
+        const product = await Pharmacy.findByIdAndDelete(req.params.id);
+        if(product){
+            res.status(200).json({
+                productName: req.body.productName,
+                price: req.body.price,
+                discount: req.body.discount,
+                stock: req.body.stock,
+                statusCode: 200,
+                msg: "resource deleted correctly"
+            });
+        }else{
+            res.status(404).json({
+                productName: null,
+                price: null,
+                discount: null,
+                stock: null,
+                statusCode: 404,
+                msg: "invalid ID"
+            });
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            productName: req.body.productName,
+            msg: "Error - " + error.message,
+            statusCode: 500
+        })
+    }
+
+}
+
+module.exports = {getPharmacy, postPharmacy, putPharmacy, deletePharmacy};
