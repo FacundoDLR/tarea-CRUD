@@ -8,13 +8,16 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+//MIDDLEWARES
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+//RUTAS
+app.use('/', indexRouter); //Ruta principal
 app.use('/users', usersRouter);
+app.use('/pharmacy', pharmacyRouter);
 
 module.exports = app;
